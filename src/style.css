@@ -1,8 +1,58 @@
 .vex-dialog-message {
-  font-weight: bold;
-  text-align: center;
+	font-weight: bold;
+	text-align: center;
+	font-size: 22px;
+	background-image: url('https://www.passprotect.io/wp-content/uploads/2018/11/logo-passprotect.png');
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: 155px;
+	padding: 20px;
+	height: 70px;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.vex-dialog-buttons button {
+	box-shadow: none;
+
+}
+
+.vex-dialog-input {
+	padding: 10px 20px 20px;
+	text-align: center;
 }
 
 .vex-dialog-input p {
-  margin-bottom: 1em;
+	margin-bottom: 1em;
+}
+
+.vex-dialog-input h1 {
+	font-size: 24px;
+    color: #5d5d5d;
+    margin-bottom: 20px;
+}
+
+.vex-dialog-input .icon {
+	text-align: center;
+	margin: 10px;
+}
+
+.vex-content form {
+	padding: 0;
+	margin: 0;
+	border-radius: 3px;
+}
+
+input[type="password"].passProtect
+{
+	border-right: 2px solid blue;
+}
+
+input[type="password"].passProtect--Pass
+{
+	border-right: 2px solid green;
+}
+
+input[type="password"].passProtect--Fail
+{
+	border-right: 2px solid red;
 }
