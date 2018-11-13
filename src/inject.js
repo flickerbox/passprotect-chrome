@@ -240,23 +240,21 @@
  				if (data[0].indexOf(shortHash) === 0) {
  					
  					if (evt.target.classList.contains("passProtect--Pass")) {
- 						console.log("contains Pass");
  						evt.target.classList.remove("passProtect--Pass");
  						evt.target.classList.add("passProtect--Fail");
  					}else {
- 						console.log("Just Fail");
  						evt.target.classList.add("passProtect--Fail");
  					}
  					
  					var message = [
- 					'<p>The password you just entered has been found in <b>' + numberFormatter(parseInt(data[1]))  + '</b> data breaches. <b>This password is not safe to use</b>.</p>',
- 					'<p>This means attackers can easily find this password online and will often try to access accounts with it.</p>',
- 					'<p>If you are currently using this password, please change it immediately to protect yourself. For more information, visit <a href="https://haveibeenpwned.com/" title="haveibeenpwned">Have I Been Pwned?</a>',
- 					'<p>This notice will not show again for the duration of this session to give you time to update this password.</p>'
+ 					'<p class="passprotect-icon"><img src="https://www.passprotect.io/wp-content/uploads/2018/11/warning.png" /></p>',
+ 					'<h1>Unsafe password detected!</h1>',
+ 					'<p>This password you have entered is not safe to use. It has been found in <b>' + numberFormatter(parseInt(data[1]))  + '</b> data breaches.</p>',
+ 					'<p class="prevent-link"><a href="https://haveibeenpwned.com/" target="_blank">How to protect yourself</a></p>'
  					].join('');
 
  					vex.dialog.alert({
- 						message: "Unsafe password detected!",
+ 						message: "",
  						input: message,
  						callback: function() {
 			              // Cache this password once the user clicks the "I Understand" button
@@ -270,7 +268,6 @@
           				}
       				});
  				}else {
- 					console.log("Else pass");
  					if (!evt.target.classList.contains("passProtect--Pass")) {
  						evt.target.classList.add("passProtect--Pass");
  					}
@@ -300,35 +297,29 @@
  function checkPhishingDomain (evt) {
  	var phishDomain = getHost();
  	var xmlHttp = new XMLHttpRequest();
- 	console.log("phishDomain: " + phishDomain);
  	var currentDomain = sessionStorage.getItem("passProtectPhishDomain");
- 	console.log("session: " + currentDomain);
 
  	if (currentDomain == null) {
  		xmlHttp.onreadystatechange = function() {
 	 		if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
 	 			var resp = JSON.parse(xmlHttp.responseText);
-	 			console.log("onreadystatechange");
-	 			console.log("responseText: " + xmlHttp.responseText);
-	 			console.log("result: " + resp.result);
-
+	 			
 	 			if (resp.result === true) {
 	 				sessionStorage.getItem("passProtectPhishDomain");
 	 				
 	 				var message = [
-	 				'<p class="icon"><img src="https://www.passprotect.io/wp-content/uploads/2018/11/warning.png" /></p>',
+	 				'<p class="passprotect-icon"><img src="https://www.passprotect.io/wp-content/uploads/2018/11/warning.png" /></p>',
 	 				'<h1>Phishing Domain detected!</h1>',
 	 				'<p>The site you have come to <b>' + phishDomain  + '</b> is in a list of phishing domains. </p>',
 	 				'<p><b>This domain may not be safe.</b>.</p>',
-	 				'<p>This page or another page on this domain has been listed as a known Phishing site.</p>',
-	 				'<p>This notice will not show again for this domain for the duration of this tabs session</p>'
+	 				'<p>This notice will not show again for this domain for the duration of this tabs session</p>',
+	 				'<p class="prevent-link"><a href="https://www.phishtank.com/what_is_phishing.php" target="_blank">Learn more</a></p>'
 	 				].join('');
 
 	 				vex.dialog.alert({
 	 					message: "",
 	 					input: message,
 	 					callback: function() {
-							console.log("Callback");
 							sessionStorage.setItem("passProtectPhishDomain", true);
 						}
 					});
@@ -342,25 +333,26 @@
  }
 
 // Bootstrap our passProtect functionality after the page has fully loaded.
-if (window.attachEvent) {
-	console.log("attachEvent");
-	window.attachEvent("onload", protectInputs);
-} else {
-	if (window.onload) {
-		console.log("onload");
-		var currentOnLoad = window.onload;
-		var newOnLoad = function(evt) {
-			currentOnLoad(evt);
-			protectInputs(evt);
-		};
-
-		window.onload = newOnLoad;
-	} else {
-		console.log("onload else");
-	    // window.onload = protectInputs;
-	    window.onload = function (){
-	    	protectInputs();
-	    	checkPhishingDomain();
-	    }
-	}
-}
+window.addEventListener("load", function(){
+    protectInputs();
+	checkPhishingDomain();
+});
+// if (window.attachEvent) {
+// 	window.attachEvent("onload", protectInputs);
+// } else {
+// 	if (window.onload) {
+// 		var currentOnLoad = window.onload;
+// 		var newOnLoad = function(evt) {
+// 			currentOnLoad(evt);
+// 			protectInputs(evt);
+// 			checkPhishingDomain();
+// 		};
+// 		window.onload = newOnLoad;
+// 	} else {
+		
+// 	    window.onload = function (){
+// 	    	protectInputs();
+// 	    	checkPhishingDomain();
+// 	    }
+// 	}
+// }

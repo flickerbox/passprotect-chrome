@@ -1,3 +1,29 @@
+.vex.vex-theme-wireframe {
+	padding-top: 120px;
+	padding-bottom: 120px; 
+}
+
+.vex.vex-theme-wireframe .vex-content {
+	width: 450px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 17px;
+	border-radius: 3px;
+	padding: 0;
+	border: none;
+}
+
+.vex.vex-theme-wireframe .vex-dialog-button.vex-dialog-button-primary {
+	background: #007dc1;
+}
+
+.vex b {
+	font-weight: 600 !important;
+}
+
+.vex-dialog-input{
+	max-width: 450px;
+}
+
 .vex-dialog-message {
 	font-weight: bold;
 	text-align: center;
@@ -7,33 +33,97 @@
 	background-repeat: no-repeat;
 	background-size: 155px;
 	padding: 20px;
-	height: 70px;
+	height: 80px;
 	border-bottom: 1px solid #e8e8e8;
+}
+
+.vex-dialog-button {
+	float: none;
+}
+
+.vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input {
+	margin-bottom: 0;
+}
+
+.vex.vex-theme-wireframe .vex-dialog-button {
+	float: none;
+	border-radius: 3px;
+	text-transform: none;
+}
+
+.vex-dialog-buttons {
+	text-align: center;
+	padding-bottom: 70px;
 }
 
 .vex-dialog-buttons button {
 	box-shadow: none;
-
+	border-radius: 3px;
 }
 
 .vex-dialog-input {
-	padding: 10px 20px 20px;
+	padding: 10px 30px 0;
 	text-align: center;
+	margin-bottom: 0;
+}
+
+.vex-dialog-input {
+	position: relative;
+
+}
+
+.vex-dialog-input .prevent-link {
+	position: absolute;
+	bottom: -116px;
+	left: 50%;
+	transform: translateX(-50%)
+}
+
+.vex-dialog-input .prevent-link a {
+	text-decoration: none;
+}
+
+.vex-dialog-input .prevent-link a:after{
+	content: "";
+	height: 16px;
+	width: 14px;
+	background-image: url(https://www.passprotect.io/wp-content/uploads/2018/11/external-link.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: 100%;
+	position: absolute;
+	top: 20%;
+	right: -20px;
 }
 
 .vex-dialog-input p {
 	margin-bottom: 1em;
+	font-size: 17px;
+	line-height: 1.5em;
 }
 
 .vex-dialog-input h1 {
 	font-size: 24px;
-    color: #5d5d5d;
-    margin-bottom: 20px;
+	color: #5d5d5d;
+	margin: 20px 0;
+	font-weight: 600;
+	font-family: Helvetica, Arial, sans-serif;
+	letter-spacing: 0;
+	line-height: 1.5em;
+	text-align:center !important;
 }
 
-.vex-dialog-input .icon {
+.vex-dialog-input .passprotect-icon {
 	text-align: center;
 	margin: 10px;
+}
+
+.vex-dialog-input .passprotect-icon img{
+	width: 35px;
+}
+
+.vex-dialog-input a {
+	color: #007dc1;
 }
 
 .vex-content form {
@@ -44,15 +134,15 @@
 
 input[type="password"].passProtect
 {
-	border-right: 2px solid blue;
+	/*border-right: 2px solid blue;*/
 }
 
 input[type="password"].passProtect--Pass
 {
-	border-right: 2px solid green;
+	/*border-right: 2px solid green;*/
 }
 
 input[type="password"].passProtect--Fail
 {
-	border-right: 2px solid red;
+	/*border-right: 2px solid red;*/
 }
