@@ -134,15 +134,19 @@
 
 input[type="password"].passProtect
 {
-	/*border-right: 2px solid blue;*/
+	transition: none;
+	background-image: url(https://www.passprotect.io/wp-content/uploads/2018/05/PassProtect-32x32-icon.png);
+	background-repeat: no-repeat;
+	background-position: 98% 50%;
+	background-size: 12px;
 }
 
 input[type="password"].passProtect--Pass
 {
-	/*border-right: 2px solid green;*/
+	background-image: url(https://www.passprotect.io/wp-content/uploads/2018/11/PassProtect-32x32-icon-green.png);
 }
 
 input[type="password"].passProtect--Fail
 {
-	/*border-right: 2px solid red;*/
+	background-image: url(https://www.passprotect.io/wp-content/uploads/2018/11/PassProtect-32x32-icon-red.png);
 }

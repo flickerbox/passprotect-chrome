@@ -102,14 +102,14 @@
  		switch (inputs[i].type) {
  			case "email":
         	//inputs[i].addEventListener("change", protectEmailInput);
-        break;
-        
-        case "password":
+        	break;
+
+        	case "password":
         	inputs[i].addEventListener("change", protectPasswordInput);
         	inputs[i].classList.add("passProtect");
-        break;
+        	break;
+        }
     }
-}
 
   //inputs = document.querySelectorAll("input[type='text']");
   //for (var i = 0; i < inputs.length; i++) {
@@ -179,8 +179,8 @@
 			              // Cache this email once the user clicks the "I Understand" button
 			              // so we don't continuously annoy the user with the same warnings.
 			              localStorage.setItem(getEmailHash(inputValue), "true");
-          				}
-      				});
+			          }
+			      });
  				}
  			}
  		};
@@ -217,6 +217,22 @@
 
 
 /**
+ *
+ * Set the Class on the password field for status
+ * @param {object} evt - The DOM event object,  The status boolean
+ */
+ function setPassProtectStatus(evt, status){
+ 	if (status == true) {
+ 		evt.target.classList.remove("passProtect--Fail");
+ 		evt.target.classList.add("passProtect--Pass");
+ 	} else{
+ 		evt.target.classList.remove("passProtect--Pass");
+ 		evt.target.classList.add("passProtect--Fail");
+ 	}
+ }
+
+
+/**
  * This function runs whenever a password input's value changes. It protects
  * checks the password against the haveibeenpwned API and alerts the user if the
  * password they've entered has been breached.
@@ -228,9 +244,12 @@
  	var hash = sha1(inputValue).toUpperCase();
  	var hashPrefix = hash.slice(0, 5);
  	var shortHash = hash.slice(5);
+ 	var passProtectStatus = true;
  	var xmlHttp = new XMLHttpRequest();
 
  	xmlHttp.onreadystatechange = function() {
+ 		passProtectStatus = true;
+
  		if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
  			var resp = xmlHttp.responseText.split("\n");
 
@@ -239,12 +258,7 @@
 
  				if (data[0].indexOf(shortHash) === 0) {
  					
- 					if (evt.target.classList.contains("passProtect--Pass")) {
- 						evt.target.classList.remove("passProtect--Pass");
- 						evt.target.classList.add("passProtect--Fail");
- 					}else {
- 						evt.target.classList.add("passProtect--Fail");
- 					}
+ 					passProtectStatus = false;
  					
  					var message = [
  					'<p class="passprotect-icon"><img src="https://www.passprotect.io/wp-content/uploads/2018/11/warning.png" /></p>',
@@ -265,21 +279,22 @@
 			              // session. Once they've come back to the site at a later time, we
 			              // should bug them if they try to use the same password >:D
 			              sessionStorage.setItem(getPasswordHash(inputValue), "true");
-          				}
-      				});
- 				}else {
- 					if (!evt.target.classList.contains("passProtect--Pass")) {
- 						evt.target.classList.add("passProtect--Pass");
- 					}
+			          	}
+			      	});
+			      	// Break out of For as we already have a match
+			      	break;
  				}
  			}
+ 			// Set password field status class
+ 			setPassProtectStatus(evt, passProtectStatus);
  		}
  	};
 
   // If this hash is cached, we shouldn't do anything.
   if (isIgnored(getPasswordHash(inputValue))) {
-  	evt.target.classList.add("passProtect--Fail");
-  	return;
+  	// Set Password status class
+	setPassProtectStatus(evt, false);
+	return;
   }
 
   // We're using the API with k-Anonymity searches to protect privacy.
@@ -301,58 +316,40 @@
 
  	if (currentDomain == null) {
  		xmlHttp.onreadystatechange = function() {
-	 		if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-	 			var resp = JSON.parse(xmlHttp.responseText);
-	 			
-	 			if (resp.result === true) {
-	 				sessionStorage.getItem("passProtectPhishDomain");
-	 				
-	 				var message = [
-	 				'<p class="passprotect-icon"><img src="https://www.passprotect.io/wp-content/uploads/2018/11/warning.png" /></p>',
-	 				'<h1>Phishing Domain detected!</h1>',
-	 				'<p>The site you have come to <b>' + phishDomain  + '</b> is in a list of phishing domains. </p>',
-	 				'<p><b>This domain may not be safe.</b>.</p>',
-	 				'<p>This notice will not show again for this domain for the duration of this tabs session</p>',
-	 				'<p class="prevent-link"><a href="https://www.phishtank.com/what_is_phishing.php" target="_blank">Learn more</a></p>'
-	 				].join('');
+ 			if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+ 				var resp = JSON.parse(xmlHttp.responseText);
 
-	 				vex.dialog.alert({
-	 					message: "",
-	 					input: message,
-	 					callback: function() {
-							sessionStorage.setItem("passProtectPhishDomain", true);
-						}
-					});
-	 			}
-	 		}
-	 	}
+ 				if (resp.result === true) {
+ 					sessionStorage.getItem("passProtectPhishDomain");
 
-	 	xmlHttp.open("GET", PASS_PROTECT_DOMAIN_CHECK_URI, true);
-	 	xmlHttp.send(null);
-	}
+ 					var message = [
+ 					'<p class="passprotect-icon"><img src="https://www.passprotect.io/wp-content/uploads/2018/11/warning.png" /></p>',
+ 					'<h1>Phishing Domain detected!</h1>',
+ 					'<p>The site you have come to <b>' + phishDomain  + '</b> is in a list of phishing domains. </p>',
+ 					'<p><b>This domain may not be safe.</b>.</p>',
+ 					'<p>This notice will not show again for this domain for the duration of this tabs session</p>',
+ 					'<p class="prevent-link"><a href="https://www.phishtank.com/what_is_phishing.php" target="_blank">Learn more</a></p>'
+ 					].join('');
+
+ 					vex.dialog.alert({
+ 						message: "",
+ 						input: message,
+ 						callback: function() {
+ 							sessionStorage.setItem("passProtectPhishDomain", true);
+ 						}
+ 					});
+ 				}
+ 			}
+ 		}
+
+ 		xmlHttp.open("GET", PASS_PROTECT_DOMAIN_CHECK_URI, true);
+ 		xmlHttp.send(null);
+ 	}
  }
 
 // Bootstrap our passProtect functionality after the page has fully loaded.
 window.addEventListener("load", function(){
-    protectInputs();
+	protectInputs();
 	checkPhishingDomain();
 });
-// if (window.attachEvent) {
-// 	window.attachEvent("onload", protectInputs);
-// } else {
-// 	if (window.onload) {
-// 		var currentOnLoad = window.onload;
-// 		var newOnLoad = function(evt) {
-// 			currentOnLoad(evt);
-// 			protectInputs(evt);
-// 			checkPhishingDomain();
-// 		};
-// 		window.onload = newOnLoad;
-// 	} else {
-		
-// 	    window.onload = function (){
-// 	    	protectInputs();
-// 	    	checkPhishingDomain();
-// 	    }
-// 	}
-// }
+
