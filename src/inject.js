@@ -14,6 +14,7 @@
  }
 
  import * as sha1 from "js-sha1";
+ import * as sha256 from "js-sha256";
  import * as vex from "../vendor/vex.combined.min.js";
  import "../vendor/vex.css";
  import "../vendor/vex-theme-wireframe.css";
@@ -35,7 +36,9 @@
  var PASS_PROTECT_EMAIL_CHECK_URI = "https://haveibeenpwned.com/api/v2/breachedaccount/";
  var PASS_PROTECT_PASTE_CHECK_URI = "https://haveibeenpwned.com/api/v2/pasteaccountaccount/";
  var PASS_PROTECT_PASSWORD_CHECK_URI = "https://api.pwnedpasswords.com/range/";
- var PASS_PROTECT_DOMAIN_CHECK_URI = "https://40zds2aj31.execute-api.us-east-1.amazonaws.com/v0/phishtank";
+  var PASS_PROTECT_DOMAIN_CHECK_URI = "https://40zds2aj31.execute-api.us-east-1.amazonaws.com/v0/phishtank";
+ // New
+ // var PASS_PROTECT_DOMAIN_CHECK_URI = "https://40zds2aj31.execute-api.us-east-1.amazonaws.com/v1/domain?check_hash=";
 
 
 /**
@@ -310,7 +313,9 @@
  * @param {object} evt - The DOM event object.
  */
  function checkPhishingDomain (evt) {
- 	var phishDomain = getHost();
+	var phishDomain = getHost();
+	// New call with full host
+ 	// var phishDomain = window.location.host;
  	var xmlHttp = new XMLHttpRequest();
  	var currentDomain = sessionStorage.getItem("passProtectPhishDomain");
 
@@ -319,7 +324,7 @@
  			if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
  				var resp = JSON.parse(xmlHttp.responseText);
 
- 				if (resp.result === true) {
+ 				if (resp.result.match === true) {
  					sessionStorage.getItem("passProtectPhishDomain");
 
  					var message = [
@@ -343,6 +348,10 @@
  		}
 
  		xmlHttp.open("GET", PASS_PROTECT_DOMAIN_CHECK_URI, true);
+ 		// New call with sha256
+ 		// xmlHttp.open("GET", PASS_PROTECT_DOMAIN_CHECK_URI + sha256(phishDomain), true);
+ 		console.log("Domain: " + phishDomain);
+ 		console.log("sha1Domain: " + sha256(phishDomain));
  		xmlHttp.send(null);
  	}
  }
