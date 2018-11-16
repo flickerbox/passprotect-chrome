@@ -3,7 +3,8 @@
   "version": "0.1.8",
   "description": "Stop using bad passwords.",
   "dependencies": {
-    "js-sha1": "^0.6.0"
+    "js-sha1": "^0.6.0",
+    "js-sha256": "^0.9.0"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.5.1",
