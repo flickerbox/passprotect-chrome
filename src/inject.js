@@ -36,9 +36,8 @@
  var PASS_PROTECT_EMAIL_CHECK_URI = "https://haveibeenpwned.com/api/v2/breachedaccount/";
  var PASS_PROTECT_PASTE_CHECK_URI = "https://haveibeenpwned.com/api/v2/pasteaccountaccount/";
  var PASS_PROTECT_PASSWORD_CHECK_URI = "https://api.pwnedpasswords.com/range/";
-  var PASS_PROTECT_DOMAIN_CHECK_URI = "https://40zds2aj31.execute-api.us-east-1.amazonaws.com/v0/phishtank";
  // New
- // var PASS_PROTECT_DOMAIN_CHECK_URI = "https://40zds2aj31.execute-api.us-east-1.amazonaws.com/v1/domain?check_hash=";
+ var PASS_PROTECT_DOMAIN_CHECK_URI = "https://40zds2aj31.execute-api.us-east-1.amazonaws.com/v1/domain?check_hash=";
 
 
 /**
@@ -313,9 +312,8 @@
  * @param {object} evt - The DOM event object.
  */
  function checkPhishingDomain (evt) {
-	var phishDomain = getHost();
 	// New call with full host
- 	// var phishDomain = window.location.host;
+ 	var phishDomain = window.location.host;
  	var xmlHttp = new XMLHttpRequest();
  	var currentDomain = sessionStorage.getItem("passProtectPhishDomain");
 
@@ -346,12 +344,8 @@
  				}
  			}
  		}
-
- 		xmlHttp.open("GET", PASS_PROTECT_DOMAIN_CHECK_URI, true);
  		// New call with sha256
- 		// xmlHttp.open("GET", PASS_PROTECT_DOMAIN_CHECK_URI + sha256(phishDomain), true);
- 		console.log("Domain: " + phishDomain);
- 		console.log("sha1Domain: " + sha256(phishDomain));
+ 		xmlHttp.open("GET", PASS_PROTECT_DOMAIN_CHECK_URI + sha256(phishDomain), true);
  		xmlHttp.send(null);
  	}
  }

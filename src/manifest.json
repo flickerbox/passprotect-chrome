@@ -15,6 +15,9 @@
       "js": ["inject.min.js"]
     }
   ],
+  "web_accessible_resources": [
+    "images/icon-16.png"
+  ],
   "homepage_url": "https://www.passprotect.io",
   "offline_enabled": false
 }
