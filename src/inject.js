@@ -103,15 +103,15 @@
  	for (var i = 0; i < inputs.length; i++) {
  		switch (inputs[i].type) {
  			case "email":
-        	//inputs[i].addEventListener("change", protectEmailInput);
-        	break;
+			//inputs[i].addEventListener("change", protectEmailInput);
+			break;
 
-        	case "password":
-        	inputs[i].addEventListener("change", protectPasswordInput);
-        	inputs[i].classList.add("passProtect");
-        	break;
-        }
-    }
+			case "password":
+			inputs[i].addEventListener("change", protectPasswordInput);
+			inputs[i].classList.add("passProtect");
+			break;
+		}
+	}
 
   //inputs = document.querySelectorAll("input[type='text']");
   //for (var i = 0; i < inputs.length; i++) {
@@ -178,23 +178,23 @@
  						message: "Breach detected!",
  						input: message,
  						callback: function() {
-			              // Cache this email once the user clicks the "I Understand" button
-			              // so we don't continuously annoy the user with the same warnings.
-			              localStorage.setItem(getEmailHash(inputValue), "true");
-			          }
-			      });
+						  // Cache this email once the user clicks the "I Understand" button
+						  // so we don't continuously annoy the user with the same warnings.
+						  localStorage.setItem(getEmailHash(inputValue), "true");
+						}
+					});
  				}
  			}
  		};
  	};
 
-  // If this email is cached, we shouldn't do anything.
-  if (isIgnored(getEmailHash(inputValue))) {
-  	return;
-  }
+	// If this email is cached, we shouldn't do anything.
+	if (isIgnored(getEmailHash(inputValue))) {
+		return;
+	}
 
-  xmlHttp.open("GET", PASS_PROTECT_EMAIL_CHECK_URI + encodeURIComponent(inputValue), true);
-  xmlHttp.send(null);
+	xmlHttp.open("GET", PASS_PROTECT_EMAIL_CHECK_URI + encodeURIComponent(inputValue), true);
+	xmlHttp.send(null);
 }
 
 
@@ -214,7 +214,7 @@
  * @param {string} password - The password to hash.
  */
  function getPasswordHash(password) {
- 	return sha1(sha1(password).slice(0, 5) + "-" + getHost());
+	return sha1(sha1(password).slice(0, 5) + "-" + getHost());
  }
 
 
@@ -224,12 +224,18 @@
  * @param {object} evt - The DOM event object,  The status boolean
  */
  function setPassProtectStatus(evt, status){
- 	if (status == true) {
+ 	switch (status){
+ 		case true:
  		evt.target.classList.remove("passProtect--Fail");
  		evt.target.classList.add("passProtect--Pass");
- 	} else{
+ 		break;
+ 		case false:
  		evt.target.classList.remove("passProtect--Pass");
  		evt.target.classList.add("passProtect--Fail");
+ 		break;
+ 		default:
+ 		evt.target.classList.remove("passProtect--Fail");
+ 		evt.target.classList.remove("passProtect--Pass");
  	}
  }
 
@@ -242,28 +248,30 @@
  * @param {object} evt - The DOM event object.
  */
  function protectPasswordInput(evt) {
+
  	var inputValue = evt.currentTarget.value;
  	var hash = sha1(inputValue).toUpperCase();
  	var hashPrefix = hash.slice(0, 5);
  	var shortHash = hash.slice(5);
- 	var passProtectStatus = true;
+ 	var passProtectStatus = null;
  	var xmlHttp = new XMLHttpRequest();
 
  	xmlHttp.onreadystatechange = function() {
- 		passProtectStatus = true;
 
  		if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+
+ 			passProtectStatus = true;
  			var resp = xmlHttp.responseText.split("\n");
 
  			for (var i = 0; i < resp.length; i++) {
  				var data = resp[i].split(":");
 
  				if (data[0].indexOf(shortHash) === 0) {
- 					
+
  					passProtectStatus = false;
- 					
+
  					var message = [
- 					'<p class="passprotect-icon"><img src="https://www.passprotect.io/wp-content/uploads/2018/11/warning.png" /></p>',
+ 					'<p class="passprotect-icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAfCAYAAABtYXSPAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAINSURBVHgBzZc9T9tAHMafu7MStQlRWNpObbq3U9W3qekGKIrgG4SBGWaWwCcIYmVgZWPJwAZbFBjIyIRgZQmC8KrEx13Ea3y2/3eGwG+IHdtxHj8+/3RmSEBnuzzrS39BrzOOpZGf9UUkgMGR00apKDk2B8621et1p0f/bhzAAQ5HJPyCYWNRCG8VjjiHAWP/jNtVoLZqDcMKc9IsTaowlbD9QqCKYYVRtdQid+t2muOTeOkwJ42Jivq3QtxxAl6tvVvMwwL7Zrgg3gJZ4JfZOVhgFeZ0p1QdbCX1qYz0lxkwkQkcr9wza9MOOUy7MVaQPgJXmv48g9THMrzRP6af5W3aIYcRrH97rMaARrVT1RdCOZYUpn+yiEc5DqoISWFuW3GHKMLYMHGCo0IRIaGZGMFRIYgwMgxVcFTiRBjdDE84VgJEizA0jElwz0GUCI1hwgT3TISK0BjGVXBUwkQYCGMrONk9u112YINJhIEwtoI735vH5eEKusdNWGEQ4ZMJeV9wwDqGhZrA537V/999HWjGXnB66mCaPpAYEOF9GFfBZb4tI/tjDSL3HS48FuFDMwkFx/h7uPEgQqZTedcjVQnp5BWe/qAuLwv/fB8JOO6lOl89cZWpSSYrcMS/OlKfR0hIXly8KzL1BEm8AXK/68qF6vHCK6OGSEsvuX5RV9W08EqoIdLy/d6UXr8BcGm0eoLMb1QAAAAASUVORK5CYII=" /></p>',
  					'<h1>Unsafe password detected!</h1>',
  					'<p>This password you have entered is not safe to use. It has been found in <b>' + numberFormatter(parseInt(data[1]))  + '</b> data breaches.</p>',
  					'<p class="prevent-link"><a href="https://haveibeenpwned.com/" target="_blank">How to protect yourself</a></p>'
@@ -273,36 +281,42 @@
  						message: "",
  						input: message,
  						callback: function() {
-			              // Cache this password once the user clicks the "I Understand" button
-			              // so we don't continuously annoy the user with the same warnings.
-			              //
-			              // NOTE: We're using sessionStorage here (not localStorage) as we
-			              // only want to not annoy the user for the duration of this
-			              // session. Once they've come back to the site at a later time, we
-			              // should bug them if they try to use the same password >:D
-			              sessionStorage.setItem(getPasswordHash(inputValue), "true");
-			          	}
-			      	});
-			      	// Break out of For as we already have a match
-			      	break;
- 				}
- 			}
- 			// Set password field status class
- 			setPassProtectStatus(evt, passProtectStatus);
- 		}
- 	};
+						  // Cache this password once the user clicks the "I Understand" button
+						  // so we don't continuously annoy the user with the same warnings.
+						  //
+						  // NOTE: We're using sessionStorage here (not localStorage) as we
+						  // only want to not annoy the user for the duration of this
+						  // session. Once they've come back to the site at a later time, we
+						  // should bug them if they try to use the same password >:D
+						  sessionStorage.setItem(getPasswordHash(inputValue), "true");
+						}
+					});
+					// Break out of For as we already have a match
+					break;
+				}
+			}
+			// Set password field status class
+			setPassProtectStatus(evt, passProtectStatus);
+		}
+	};
 
-  // If this hash is cached, we shouldn't do anything.
-  if (isIgnored(getPasswordHash(inputValue))) {
-  	// Set Password status class
-	setPassProtectStatus(evt, false);
-	return;
-  }
+	// If this hash is cached, we shouldn't do anything.
+	if (isIgnored(getPasswordHash(inputValue))) {
+		// Set Password status class
+		setPassProtectStatus(evt, false);
+		return;
+	}
 
-  // We're using the API with k-Anonymity searches to protect privacy.
-  // You can read more about this here: https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
-  xmlHttp.open("GET", PASS_PROTECT_PASSWORD_CHECK_URI + hashPrefix, true);
-  xmlHttp.send(null);
+	// Do not make the call if the input is empty
+	// If our pass input is empty go back to default icon state
+	if(evt.currentTarget.value.length === 0){
+		setPassProtectStatus(evt, null);
+	}else{
+		// We're using the API with k-Anonymity searches to protect privacy.
+		// You can read more about this here: https://haveibeenpwned.com/API/v2#SearchingPwnedPasswordsByRange
+		xmlHttp.open("GET", PASS_PROTECT_PASSWORD_CHECK_URI + hashPrefix, true);
+		xmlHttp.send(null);
+	}
 }
 
 /**
@@ -313,42 +327,42 @@
  */
  function checkPhishingDomain (evt) {
 	// New call with full host
- 	var phishDomain = window.location.host;
- 	var xmlHttp = new XMLHttpRequest();
- 	var currentDomain = sessionStorage.getItem("passProtectPhishDomain");
+	var phishDomain = window.location.host;
+	var xmlHttp = new XMLHttpRequest();
+	var currentDomain = sessionStorage.getItem("passProtectPhishDomain");
 
- 	if (currentDomain == null) {
- 		xmlHttp.onreadystatechange = function() {
- 			if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
- 				var resp = JSON.parse(xmlHttp.responseText);
+	if (currentDomain == null) {
+		xmlHttp.onreadystatechange = function() {
+			if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+				var resp = JSON.parse(xmlHttp.responseText);
 
- 				if (resp.result.match === true) {
- 					sessionStorage.getItem("passProtectPhishDomain");
+				if (resp.result.match === true) {
+					sessionStorage.getItem("passProtectPhishDomain");
 
- 					var message = [
- 					'<p class="passprotect-icon"><img src="https://www.passprotect.io/wp-content/uploads/2018/11/warning.png" /></p>',
- 					'<h1>Phishing Domain detected!</h1>',
- 					'<p>The site you have come to <b>' + phishDomain  + '</b> is in a list of phishing domains. </p>',
- 					'<p><b>This domain may not be safe.</b>.</p>',
- 					'<p>This notice will not show again for this domain for the duration of this tabs session</p>',
- 					'<p class="prevent-link"><a href="https://www.phishtank.com/what_is_phishing.php" target="_blank">Learn more</a></p>'
- 					].join('');
+					var message = [
+					'<p class="passprotect-icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAfCAYAAABtYXSPAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAINSURBVHgBzZc9T9tAHMafu7MStQlRWNpObbq3U9W3qekGKIrgG4SBGWaWwCcIYmVgZWPJwAZbFBjIyIRgZQmC8KrEx13Ea3y2/3eGwG+IHdtxHj8+/3RmSEBnuzzrS39BrzOOpZGf9UUkgMGR00apKDk2B8621et1p0f/bhzAAQ5HJPyCYWNRCG8VjjiHAWP/jNtVoLZqDcMKc9IsTaowlbD9QqCKYYVRtdQid+t2muOTeOkwJ42Jivq3QtxxAl6tvVvMwwL7Zrgg3gJZ4JfZOVhgFeZ0p1QdbCX1qYz0lxkwkQkcr9wza9MOOUy7MVaQPgJXmv48g9THMrzRP6af5W3aIYcRrH97rMaARrVT1RdCOZYUpn+yiEc5DqoISWFuW3GHKMLYMHGCo0IRIaGZGMFRIYgwMgxVcFTiRBjdDE84VgJEizA0jElwz0GUCI1hwgT3TISK0BjGVXBUwkQYCGMrONk9u112YINJhIEwtoI735vH5eEKusdNWGEQ4ZMJeV9wwDqGhZrA537V/999HWjGXnB66mCaPpAYEOF9GFfBZb4tI/tjDSL3HS48FuFDMwkFx/h7uPEgQqZTedcjVQnp5BWe/qAuLwv/fB8JOO6lOl89cZWpSSYrcMS/OlKfR0hIXly8KzL1BEm8AXK/68qF6vHCK6OGSEsvuX5RV9W08EqoIdLy/d6UXr8BcGm0eoLMb1QAAAAASUVORK5CYII=" /></p>',
+					'<h1>Phishing Domain detected!</h1>',
+					'<p>The site you have come to <b>' + phishDomain  + '</b> is in a list of phishing domains. </p>',
+					'<p><b>This domain may not be safe.</b>.</p>',
+					'<p>This notice will not show again for this domain for the duration of this tabs session</p>',
+					'<p class="prevent-link"><a href="https://www.phishtank.com/what_is_phishing.php" target="_blank">Learn more</a></p>'
+					].join('');
 
- 					vex.dialog.alert({
- 						message: "",
- 						input: message,
- 						callback: function() {
- 							sessionStorage.setItem("passProtectPhishDomain", true);
- 						}
- 					});
- 				}
- 			}
- 		}
- 		// New call with sha256
- 		xmlHttp.open("GET", PASS_PROTECT_DOMAIN_CHECK_URI + sha256(phishDomain), true);
- 		xmlHttp.send(null);
- 	}
- }
+					vex.dialog.alert({
+						message: "",
+						input: message,
+						callback: function() {
+							sessionStorage.setItem("passProtectPhishDomain", true);
+						}
+					});
+				}
+			}
+		}
+		// New call with sha256
+		xmlHttp.open("GET", PASS_PROTECT_DOMAIN_CHECK_URI + sha256(phishDomain), true);
+		xmlHttp.send(null);
+	}
+}
 
 // Bootstrap our passProtect functionality after the page has fully loaded.
 window.addEventListener("load", function(){
