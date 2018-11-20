@@ -343,7 +343,7 @@
 					'<p class="passprotect-icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAfCAYAAABtYXSPAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAINSURBVHgBzZc9T9tAHMafu7MStQlRWNpObbq3U9W3qekGKIrgG4SBGWaWwCcIYmVgZWPJwAZbFBjIyIRgZQmC8KrEx13Ea3y2/3eGwG+IHdtxHj8+/3RmSEBnuzzrS39BrzOOpZGf9UUkgMGR00apKDk2B8621et1p0f/bhzAAQ5HJPyCYWNRCG8VjjiHAWP/jNtVoLZqDcMKc9IsTaowlbD9QqCKYYVRtdQid+t2muOTeOkwJ42Jivq3QtxxAl6tvVvMwwL7Zrgg3gJZ4JfZOVhgFeZ0p1QdbCX1qYz0lxkwkQkcr9wza9MOOUy7MVaQPgJXmv48g9THMrzRP6af5W3aIYcRrH97rMaARrVT1RdCOZYUpn+yiEc5DqoISWFuW3GHKMLYMHGCo0IRIaGZGMFRIYgwMgxVcFTiRBjdDE84VgJEizA0jElwz0GUCI1hwgT3TISK0BjGVXBUwkQYCGMrONk9u112YINJhIEwtoI735vH5eEKusdNWGEQ4ZMJeV9wwDqGhZrA537V/999HWjGXnB66mCaPpAYEOF9GFfBZb4tI/tjDSL3HS48FuFDMwkFx/h7uPEgQqZTedcjVQnp5BWe/qAuLwv/fB8JOO6lOl89cZWpSSYrcMS/OlKfR0hIXly8KzL1BEm8AXK/68qF6vHCK6OGSEsvuX5RV9W08EqoIdLy/d6UXr8BcGm0eoLMb1QAAAAASUVORK5CYII=" /></p>',
 					'<h1>Phishing Domain detected!</h1>',
 					'<p>The site you have come to <b>' + phishDomain  + '</b> is in a list of phishing domains. </p>',
-					'<p><b>This domain may not be safe.</b>.</p>',
+					'<p><b>This domain may not be safe.</b></p>',
 					'<p>This notice will not show again for this domain for the duration of this tabs session</p>',
 					'<p class="prevent-link"><a href="https://www.phishtank.com/what_is_phishing.php" target="_blank">Learn more</a></p>'
 					].join('');
