@@ -1,3 +1,36 @@
+@font-face {
+font-family:"proxima-nova";
+src:url("https://use.typekit.net/af/925423/00000000000000003b9b038f/27/l?subset_id=2&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/925423/00000000000000003b9b038f/27/d?subset_id=2&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/925423/00000000000000003b9b038f/27/a?subset_id=2&fvd=n7&v=3") format("opentype");
+font-style:normal;font-weight:700;
+}
+
+@font-face {
+font-family:"proxima-nova";
+src:url("https://use.typekit.net/af/6a07dc/00000000000000003b9b0385/27/l?subset_id=2&fvd=n1&v=3") format("woff2"),url("https://use.typekit.net/af/6a07dc/00000000000000003b9b0385/27/d?subset_id=2&fvd=n1&v=3") format("woff"),url("https://use.typekit.net/af/6a07dc/00000000000000003b9b0385/27/a?subset_id=2&fvd=n1&v=3") format("opentype");
+font-style:normal;font-weight:100;
+}
+
+@font-face {
+font-family:"proxima-nova";
+src:url("https://use.typekit.net/af/8e11d4/00000000000000003b9b038c/27/l?subset_id=2&fvd=n6&v=3") format("woff2"),url("https://use.typekit.net/af/8e11d4/00000000000000003b9b038c/27/d?subset_id=2&fvd=n6&v=3") format("woff"),url("https://use.typekit.net/af/8e11d4/00000000000000003b9b038c/27/a?subset_id=2&fvd=n6&v=3") format("opentype");
+font-style:normal;font-weight:600;
+}
+
+@font-face {
+font-family:"proxima-nova";
+src:url("https://use.typekit.net/af/219c30/00000000000000003b9b0389/27/l?subset_id=2&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/219c30/00000000000000003b9b0389/27/d?subset_id=2&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/219c30/00000000000000003b9b0389/27/a?subset_id=2&fvd=n4&v=3") format("opentype");
+font-style:normal;font-weight:400;
+}
+
+@font-face {
+font-family:"proxima-nova";
+src:url("https://use.typekit.net/af/ed2fe5/00000000000000003b9b0387/27/l?subset_id=2&fvd=n3&v=3") format("woff2"),url("https://use.typekit.net/af/ed2fe5/00000000000000003b9b0387/27/d?subset_id=2&fvd=n3&v=3") format("woff"),url("https://use.typekit.net/af/ed2fe5/00000000000000003b9b0387/27/a?subset_id=2&fvd=n3&v=3") format("opentype");
+font-style:normal;font-weight:300;
+}
+
+.tk-proxima-nova { font-family: "proxima-nova",sans-serif; }
+
+
 .vex.vex-theme-wireframe {
 	padding-top: 120px;
 	padding-bottom: 120px; 
@@ -5,7 +38,7 @@
 
 .vex.vex-theme-wireframe .vex-content {
 	width: 450px;
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: "proxima-nova", Helvetica, Arial, sans-serif;
 	font-size: 17px;
 	border-radius: 3px;
 	padding: 0;
@@ -107,7 +140,7 @@
 	color: #5d5d5d;
 	margin: 20px 0;
 	font-weight: 600;
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: "proxima-nova", Helvetica, Arial, sans-serif;
 	letter-spacing: 0;
 	line-height: 1.5em;
 	text-align:center !important;
