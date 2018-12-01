@@ -343,9 +343,9 @@
 					var message = [
 					'<p class="passprotect-icon"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNSIgaGVpZ2h0PSIzMSIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iI0YyQzk0QyIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMTkuMTAzNyAxLjE5MjMxQzE4LjY4MzguNDc5NTQ1IDE3Ljg5ODkgMCAxNyAwYy0xLjM0MTMgMC0yLjQyODYgMS4wNjc2My0yLjQyODYgMi4zODQ2MiAwIC4xNzQ0MS4wMTkxLjM0NDQ1LjA1NTMuNTA4MjFMMS41Nzg5NCAyNi4zODA4Qy42NTY2OTggMjYuNzE5IDAgMjcuNTkxOSAwIDI4LjYxNTQgMCAyOS45MzI0IDEuMDg3MzEgMzEgMi40Mjg1NyAzMWMuMjQyIDAgLjQ3NTczLS4wMzQ4LjY5NjMtLjA5OTVMMy4xODU2NCAzMUgzMi4zMjg1bC4wOTE0LS4xNDk2QzMzLjM0MjggMzAuNTEyNSAzNCAyOS42MzkzIDM0IDI4LjYxNTRjMC0uMTA3Mi0uMDA3Mi0uMjEyNy0uMDIxMi0uMzE2MmwuNTM1NC0uODc2MUwxOS45NDI4IDEuMTkyMzFoLS44MzkxeiIgY2xpcC1ydWxlPSJldmVub2RkIi8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE3LjIxNDMgMjEuNDYxNmMtLjcyODYgMC0xLjIxNDMtLjQ3NjktMS4yMTQzLTEuMTkyM1Y5LjUzODVjMC0uNzE1MzkuNDg1Ny0xLjE5MjMxIDEuMjE0My0xLjE5MjMxLjcyODYgMCAxLjIxNDMuNDc2OTIgMS4yMTQzIDEuMTkyMzF2MTAuNzMwOGMwIC43MTU0LS40ODU3IDEuMTkyMy0xLjIxNDMgMS4xOTIzek0xNy4yMTQzIDI2LjIzMDhjLjY3MDYgMCAxLjIxNDMtLjUzMzggMS4yMTQzLTEuMTkyMyAwLS42NTg1LS41NDM3LTEuMTkyMy0xLjIxNDMtMS4xOTIzUzE2IDI0LjM4IDE2IDI1LjAzODVjMCAuNjU4NS41NDM3IDEuMTkyMyAxLjIxNDMgMS4xOTIzeiIvPjwvc3ZnPg==" /></p>',
 					'<h1>Phishing Domain detected!</h1>',
-					'<p>The page you have come to at <b>' + phishDomainPreview  + '</b> is in a list of phishing pages. </p>',
+					'<p>The site you are visiting <b>' + phishDomainPreview  + '</b> is on a list of phishing domains.</p>',
 					'<p><b>This domain may not be safe.</b></p>',
-					'<p>This notice will not show again for this domain for the duration of this tabs session</p>',
+					'<p>This notice will not show again for this domain for the duration of this tab\'s session.</p>',
 					'<p class="prevent-link"><a href="https://www.phishtank.com/what_is_phishing.php" target="_blank">Learn more</a></p>'
 					].join('');
 
