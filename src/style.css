@@ -147,12 +147,13 @@ font-style:normal;font-weight:300;
 }
 
 .vex-dialog-input .passprotect-icon {
-	text-align: center;
-	margin: 10px;
+	text-align: center !important;
+	margin: 10px !important;
 }
 
 .vex-dialog-input .passprotect-icon img{
 	width: 35px;
+	display: inline-block !important;
 }
 
 .vex-dialog-input a {
@@ -167,11 +168,11 @@ font-style:normal;font-weight:300;
 
 input[type="password"].passProtect
 {    
-	transition: none;
+	transition: none !important;
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAyCAYAAADFhCKTAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABK1JREFUeNq8Wctx2zAQpTi6Sx2EHYiuQMwxJysVmKnAdAWmKzBdgegKIl2So6kKQnVAdSBVoACZB89qtSABkgpmMJRIfB523y4Wi8n5fA7GKPPsd6QeK1VTVReq7lUtVd0ci2/NGHNMhoBVAOcE4LKl6VaDBvDjfwWrQK4A8qHHnO8AvbkZWAUwVo8MIGcjaPUEaRcKeD0YLHhoAH5xBLEHiBW461IO4HfZxu8rsIKhuE5WcGMiY2WeizXAj1dgiaHoeu8BcINBa0capaiuNLowzMns8VfpwcMT6bwZ4EVWRDjO82qwZ9cVKoBlMGLx1WgbWCt3blEAPG2zFQnsS5dVdniPiLxqBoyjjfKxFawafHIDNXrvYGrsRD0+6LtwgNpyLTlV1wyops8OT1Pu0a5Bv15l2gNkDC4vmEPfSC4M7Y3f1r72Gd4gdd25eoHFxBXcjXYnuZqwaOsDQLrmqr/mYY6FVlrVPoDDnkC1iuMuoAJw3T5G/xkAx6NKFoZEgSaSocAoEvKqUu0qBrhBu4pIOHIxPFcalAB64ECxkAyV70aanyfEDYXpp58AXIPHBTg9jAYY1Fh7yoAaajwTHm/hq7f4P8P3C5VjHAPwAfMMlmxmgmaqUkYNDSqTtmPVLoXkrlSux1P/txBGivH6SRaAjFS5MW0INSJb3ID3CZEyb1cQ6c6H0MCo5kBdDFRmzlyrLuNAXzPWPVU5tHVg8/WiQUykSEtKqFELxmasnRpVrb6/49y2Yiqv8D4W5nIGuzICcFzEhkh8CdAJ+/5A+n8GPGxcNxoYi8WWuICKuFsxW23NIqUluPkDzyXeB2zR/NhuxvHm7Jys9kTUJHHRJfw7Wn57l9DBKHSA0umwAXwHi1/juWXGZ6S8s9Cq6W1gAJx57P0JghWtnaMQO6ScPmwRnWBPbJuMhqjKFtywnbC0uMhakPbnaTpsWeWY5yvqkraCz9bxwYmdmDmOZgrRL4VV+gJKETZmLUHOXvAsucUNchz1FJKlCTbtbuY+J1qy/xuX1wguai9EbCvSJmeLXEhg9YpeBUMoemr9C0sVHXCiKIW4w7x7Y25QMuoqRKM9j7S6ggohWMmw8K8IEb+reqe+RRagFQmEcoE6FzkMjXNKIp81k07u6bZKIqnK8cB5EgKhQgjii89NARMdWINHcHG0jAuO4X8I0IR5hjS4TlAfjGbCDp6shwLWrknVEkb3THawSAC6FoZIxfwsBpVS7y9qYMqrc1v2Rn0veOqnw9hyshBa3qgrnDLepeDUQjj4xfwM5hAHG4CVlCaFMW0C+fJkS4HaYgN6TA5YCqjxpMWFRoQcbWnJz+6k0+5UsGotudhCCT3wzxFSm2VLIu/dFuW1hYi6w1PHxJkn0AyGZgP61BaOhg4R1J3g1kx5VQCqrjM/PEKNnXJmMby7rnRUZ5ID7kUbzJuliTaOD00bYdebg04fgf3m5w0BUGeCzuuGERIsA/s1kUkVJUH79agJbDKeCxsNLPOLWdDvpvGEI7p3Urn3RTNOrUXgfm/2z9KxKTR95pwMvcIHNYqg/TbSW+U3ASsE4DOm8mys+7MwGKkAUIRYNsAzGvOi768AAwDwJ5ORjkV9JQAAAABJRU5ErkJggg==);
-	background-repeat: no-repeat;
-	background-position: 98% 50%;
-	background-size: 12px;
+	background-repeat: no-repeat !important;
+	background-position: 98% 50% !important;
+	background-size: 12px !important;
 }
 
 input[type="password"].passProtect--Pass
